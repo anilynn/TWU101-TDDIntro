@@ -32,7 +32,7 @@ public class LibraryTest {
     }
 
     @Test
-    @Ignore // Remove each @Ignore and implement test
+    //@Ignore // Remove each @Ignore and implement test
     public void shouldPrintBookTitleWhenThereIsOneBook() {
         String title = "Book Title";
         books.add(title);
@@ -40,19 +40,31 @@ public class LibraryTest {
         library.listBooks();
 
         // add a verify statement here that shows that the book title was printed by the printStream
+        verify(printStream).println(title + "\n");
+
     }
 
     @Test
-    @Ignore // Remove each @Ignore and implement test
+    //@Ignore // Remove each @Ignore and implement test
     public void shouldPrintNothingWhenThereAreNoBooks() {
 
         // implement me
+        library.listBooks();
+        verify(printStream).println("");
     }
 
     @Test
-    @Ignore // Remove each @Ignore and implement test
+    //@Ignore // Remove each @Ignore and implement test
     public void shouldPrintBothBookTitlesWhenThereAreTwoBooks() throws IOException {
         // implement me
+        String title = "Book Title1";
+        String title2 = "Book Title2";
+        books.add(title);
+        books.add(title2);
+
+        library.listBooks();
+
+        verify(printStream).println(title + "\n" + title2 + "\n");
     }
 
     @Test
@@ -60,12 +72,14 @@ public class LibraryTest {
         when(bufferedReader.readLine()).thenReturn("The Hobbit");
         library.enterBook();
         assertThat(books, hasItems("The Hobbit"));
+
     }
 
     @Test
-    @Ignore // Remove each @Ignore and implement test
+    //@Ignore // Remove each @Ignore and implement test
     public void shouldDeleteBookFromCollectionWhenRemovedByUser() throws IOException {
         // Add when/thenReturn here
+        when(bufferedReader.readLine()).thenReturn("The Two Towers");
 
         books.add("The Two Towers");
         library.removeBook();
